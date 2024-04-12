@@ -1,27 +1,92 @@
-# DockerizedAngularPill
+# Guía Rápida de Docker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
 
-## Development server
+## Autenticación en Docker Hub
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Utiliza el siguiente comando para iniciar sesión en Docker Hub o cualquier otro registro de Docker:
 
-## Code scaffolding
+```bash
+docker login
+```
+```bash
+docker login -u nombre-de-usuario -p password
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Si es necesario autenticarte en un registro privado, especifica la URL del registro:
 
-## Build
+```bash
+docker login [REGISTRY_URL]
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Donde `[REGISTRY_URL]` representa la URL del registro privado que deseas utilizar.
 
-## Running unit tests
+## Comandos Básicos
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Listar Todas las Imágenes Locales
 
-## Running end-to-end tests
+Para listar todas las imágenes almacenadas localmente en tu máquina:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+docker images
+```
 
-## Further help
+### Construir una Imagen
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para construir una imagen a partir de un Dockerfile en el directorio actual, usa:
+
+```bash
+docker build -t nombre-de-tu-imagen .
+```
+
+### Ejecutar un Contenedor
+
+Para iniciar un contenedor a partir de una imagen:
+
+```bash
+docker run -d -p puerto_host:puerto_contenedor nombre-de-tu-imagen
+```
+
+Donde `-d` corre el contenedor en segundo plano y `-p puerto_host:puerto_contenedor` mapea un puerto de tu máquina host a un puerto en el contenedor.
+
+### Listar Contenedores Activos
+
+Para ver todos los contenedores activos:
+
+```bash
+docker ps
+```
+
+Para ver todos los contenedores, incluyendo los inactivos:
+
+```bash
+docker ps -a
+```
+
+### Detener un Contenedor en ejecución
+
+```bash
+docker stop [CONTAINER_ID]
+```
+
+Donde `[CONTAINER_ID]` es el ID o nombre del contenedor que deseas detener.
+
+### Eliminar un Contenedor
+
+```bash
+docker rm [CONTAINER_ID]
+```
+
+### Eliminar una Imagen
+
+```bash
+docker rmi [IMAGE_ID]
+```
+
+### Eliminar Imágenes, Contenedores, y Volúmenes no Utilizados
+
+```bash
+docker system prune
+```
+
+Este comando eliminará contenedores detenidos, redes no utilizadas, y imágenes colgadas.
+
