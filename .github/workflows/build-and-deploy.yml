@@ -28,4 +28,4 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: tu_usuario_docker_hub/nombre_de_tu_imagen:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/angular-pill:latest
